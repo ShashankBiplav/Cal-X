@@ -17,14 +17,17 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     private TextView textViewShowCalculations, textViewResults;
 
     //Instance variables
-    private String currentString, stringNumberAtLeft, stringNumberAtRight;
+    private String currentNumber, stringNumberAtLeft, stringNumberAtRight;
     private OPERATOR currentOperator;
-    private int calculationsResult;
+    private double calculationsResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+
+        currentNumber = "";
+        calculationsResult = 0.0;
 
         textViewShowCalculations = findViewById(R.id.textViewShowCalculations);
         textViewResults = findViewById(R.id.textViewResults);
@@ -54,24 +57,34 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
         switch (view.getId()){
             case R.id.imageButton7:
+                numberIsTapped(7);
                 break;
             case R.id.imageButton8:
+                numberIsTapped(8);
                 break;
             case  R.id.imageButton9:
+                numberIsTapped(9);
                 break;
             case R.id.imageButton4:
+                numberIsTapped(4);
                 break;
             case R.id.imageButton5:
+                numberIsTapped(5);
                 break;
             case R.id.imageButton6:
+                numberIsTapped(6);
                 break;
             case  R.id.imageButton1:
+                numberIsTapped(1);
                 break;
             case R.id.imageButton2:
+                numberIsTapped(2);
                 break;
             case R.id.imageButton3:
+                numberIsTapped(3);
                 break;
             case R.id.imageButton0:
+                numberIsTapped(0);
                 break;
             case R.id.imageButtonClear:
                 break;
@@ -90,5 +103,42 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
         }
 
+    }
+    private  void numberIsTapped(int tappedNumber){
+        currentNumber = currentNumber + String.valueOf(tappedNumber);
+        textViewResults.setText(currentNumber);
+    }
+
+    private void operatorIsTapped(OPERATOR tappedOperator){
+        if (currentOperator != null && currentNumber !=""){
+            stringNumberAtRight = currentNumber;
+            currentNumber = "";
+
+            switch (currentOperator){
+                case ADD:
+                    calculationsResult = Double.parseDouble(stringNumberAtLeft)+
+                            Double.parseDouble(stringNumberAtRight);
+                    break;
+
+                case SUBTRACT:
+                    calculationsResult = Double.parseDouble(stringNumberAtLeft)-
+                            Double.parseDouble(stringNumberAtRight);
+                    break;
+
+                case MULTIPLY:
+                    calculationsResult =Double.parseDouble(stringNumberAtLeft)*
+                            Double.parseDouble(stringNumberAtRight);
+                    break;
+
+                case DIVIDE:
+                    calculationsResult = Double.parseDouble(stringNumberAtLeft) / Double.parseDouble(stringNumberAtRight);
+                    break;
+
+                case EQUAL:
+                    break;
+
+            }
+            stringNumberAtLeft = String.valueOf(calculationsResult);
+        }
     }
 }
