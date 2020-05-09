@@ -93,12 +93,16 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             case R.id.imageButtonEqual:
                 break;
             case R.id.imageButtonAddition:
+                operatorIsTapped(OPERATOR.ADD);
                 break;
             case R.id.imageButtonSubtraction:
+                operatorIsTapped(OPERATOR.SUBTRACT);
                 break;
             case R.id.imageButtonMultiplication:
+                operatorIsTapped(OPERATOR.MULTIPLY);
                 break;
             case R.id.imageButtonDivision:
+                operatorIsTapped(OPERATOR.DIVIDE);
                 break;
 
         }
@@ -139,6 +143,12 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
             }
             stringNumberAtLeft = String.valueOf(calculationsResult);
+            textViewResults.setText(stringNumberAtLeft);
         }
+        else {
+            stringNumberAtLeft= currentNumber;
+            currentNumber = "";
+        }
+        currentOperator = tappedOperator;
     }
 }
