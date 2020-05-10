@@ -1,8 +1,14 @@
 package com.example.cal_x;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,9 +16,12 @@ import java.text.BreakIterator;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private Toolbar customToolbar;
+
     private enum OPERATOR{
         ADD, SUBTRACT, MULTIPLY, DIVIDE, EQUAL
     }
+
 
     private TextView textViewShowCalculations, textViewResults;
 
@@ -26,6 +35,9 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
+
+        customToolbar = findViewById(R.id.customToolbar);
+        setSupportActionBar(customToolbar);
 
         currentNumber = "";
         calculationsResult = 0.0;
@@ -45,13 +57,31 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.imageButton3).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButton0).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButtonClear).setOnClickListener(CalculatorActivity.this);
-        findViewById(R.id.imageButtonDecimal).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButtonEqual).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButtonAddition).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButtonSubtraction).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButtonMultiplication).setOnClickListener(CalculatorActivity.this);
         findViewById(R.id.imageButtonDivision).setOnClickListener(CalculatorActivity.this);
 
+
+    }
+    //custom menu in app bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_info:
+                Intent intent = new Intent(CalculatorActivity.this, About.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -90,8 +120,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.imageButtonClear:
                 clearTapped();
-                break;
-            case R.id.imageButtonDecimal:
                 break;
             case R.id.imageButtonEqual:
                 operatorIsTapped(OPERATOR.EQUAL);
