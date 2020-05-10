@@ -27,6 +27,8 @@
         android:layout_height="100dp"
         android:src="@drawable/me"
         android:layout_marginBottom="345dp"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="5sp"
         app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
         app:layout_constraintStart_toStartOf="@+id/relativeLayout"
