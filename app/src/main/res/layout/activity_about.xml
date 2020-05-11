@@ -28,6 +28,7 @@
         android:src="@drawable/me"
         android:layout_marginBottom="345dp"
         app:civ_border_color="@color/colorAccent"
+        android:translationZ="@android:dimen/app_icon_size"
         app:civ_border_width="5sp"
         app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
